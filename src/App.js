@@ -4,6 +4,7 @@ import PublishView from './Publish/publish';
 import './App.css'; // Import your CSS file
 import Divider from '@mui/material/Divider';
 import InvokeView from './Invoke';
+import Chip from '@mui/material/Chip';
 
 axios.defaults.baseURL = 'http://localhost:8080'; // Change to your backend URL
 
@@ -28,23 +29,7 @@ function App() {
   //       console.error('Error fetching data:', error);
   //     });
   // }, []);
-
-
-//   const invokeProgram = () => {
-//     console.log(params);
-//     console.log(funcName);
-//       console.log(id);
-
-//     axios.post('http://localhost:8080/api/invoke', {name: funcName, params: params, programID: id}, {
-//       headers: { 'Content-Type': 'application/octet-stream' }}
-//       ) // Replace with your data
-//         .then(response => {
-//           console.log(response.data);
-//         })
-//         .catch(error => {
-//             console.error('Error sending data:', error);
-//         });
-// };
+  
   const addProgram = (fileName, id, programData) => {
     // convert filename into program name
     var programName = fileName.split(".")[0];
@@ -60,9 +45,8 @@ function App() {
         <h1 className="header-text">JackJack IDE</h1>
         <Divider  />
       <PublishView addProgram={addProgram}/>
-      <Divider  />
       <InvokeView programs={programs}/>
-
+      
     </div>
   );
 }

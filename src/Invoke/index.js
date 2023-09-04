@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import FunctionInput from './FunctionInput';
+// move to constants
+const id_string = "_id_0x";
 
 const InvokeView = (props) => {
 
@@ -9,6 +12,7 @@ const InvokeView = (props) => {
     console.log(programs)
     const [currentProgram, setCurrentProgram] = React.useState('');
    
+
     const handleChange = (
         event,
         newAlignment
@@ -16,10 +20,7 @@ const InvokeView = (props) => {
         setCurrentProgram(newAlignment);
       };
 
-
-
-
-      const renderPrograms = () => {
+      const renderProgramToggle = () => {
         return <ToggleButtonGroup
             color="primary"
             value={currentProgram}
@@ -28,26 +29,41 @@ const InvokeView = (props) => {
             aria-label="Platform"
         >
             {Object.keys(programs).map((key) => (
-                <ToggleButton value={key}>{key}</ToggleButton>
+                <ToggleButton key={key} value={key}>{key}</ToggleButton>
             ))
             }
         </ToggleButtonGroup>
     }
 
-    //   const programToggleButtons = () => {
-    //     var programList = []
+    const getProgramId = (programName) => {
+        return programName.split(id_string)[1];
+    }
 
-    //     for (const [key, value] of Object.entries(programs)) {
-    //         programList.push(<ToggleButton value={key}>key</ToggleButton>)
-    //       }
-    //     }
-    //     return programList;
-    //     }
+
+    const renderProgramFunctions = () => {
+        // get current program
+        var program = programs[currentProgram];
+        if (program == null) {
+            return <div></div>
+        }
+        // loop through functions
+        return program.map((func) => (
+            <div>
+                <FunctionInput id={getProgramId(currentProgram)} name={func[0]} numParams={func[1]} />
+            </div>
+        ))
+    }
+
   return (
    <div className='publishContainer'>
    
     {programs != null && 
-    renderPrograms()
+    
+    <div> 
+        {renderProgramToggle()} {renderProgramFunctions()}    
+     </div>
+
+    
     }   
    </div>
   );
