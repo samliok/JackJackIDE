@@ -1,91 +1,67 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import FileUploader from './FileUploader';
+import PublishView from './Publish/publish';
+import './App.css'; // Import your CSS file
+import Divider from '@mui/material/Divider';
+import InvokeView from './Invoke';
 
 axios.defaults.baseURL = 'http://localhost:8080'; // Change to your backend URL
 
+const id_string = "_id_0x";
+// programs data structure looks like this 
+// {
+//   "token_${id_string}1": [["mint", 3], ["transfer", 2]],
+//   "lottery_${id_string}3": [["set", 3], ["play", 2]]
+//   "token_${id_string}3": [["mint", 3], ["transfer", 2]]
+// }
 function App() {
-  const [message, setMessage] = useState('');
-  const [data, setData] = useState('');
-  const [uploadedBytes, setUploadedBytes] = useState(null);
-  const [userFuncs, setUserFuncs] = useState([]);
-  const [funcName, setFuncName] = useState('');
-  const [params, setParams] = useState('');
+  // stores all programs uploaded by user
+  const [programs, setPrograms] = useState(null)
 
-  const [id, setId] = useState(0);
-  const uploadBytes = (bytes) => {
-    setUploadedBytes(bytes);
+  // useEffect(() => {
+  //   // Fetch data from the Go API
+  //   axios.get('http://localhost:8080/ping')
+  //     .then(response => {
+  //       console.log(response.data);
+  //     })
+  //     .catch(error => {
+  //       console.error('Error fetching data:', error);
+  //     });
+  // }, []);
+
+
+//   const invokeProgram = () => {
+//     console.log(params);
+//     console.log(funcName);
+//       console.log(id);
+
+//     axios.post('http://localhost:8080/api/invoke', {name: funcName, params: params, programID: id}, {
+//       headers: { 'Content-Type': 'application/octet-stream' }}
+//       ) // Replace with your data
+//         .then(response => {
+//           console.log(response.data);
+//         })
+//         .catch(error => {
+//             console.error('Error sending data:', error);
+//         });
+// };
+  const addProgram = (fileName, id, programData) => {
+    // convert filename into program name
+    var programName = fileName.split(".")[0];
+    // append id
+    programName = programName + id_string + id;
+    // add to programs
+    setPrograms({...programs, [programName]: programData});
   }
-  useEffect(() => {
-    // Fetch data from the Go API
-    axios.get('http://localhost:8080/ping')
-      .then(response => {
-        console.log(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-      });
-  }, []);
 
-    const sendDataToGo = () => {
-      axios.post('http://localhost:8080/api/publish', uploadedBytes, {
-        headers: { 'Content-Type': 'application/octet-stream' }}
-        ) // Replace with your data
-          .then(response => {
-            console.log(response.data);
-            var data = []
-            // loop through key value pairs
-            for (const [key, value] of Object.entries(response.data.function_data)) {
-              data.push([key, value])
-            }
-            setUserFuncs(data);
-            console.log(data);
-            setId(response.data.id);
-            setData(response.data);
-          })
-          .catch(error => {
-              console.error('Error sending data:', error);
-          });
-  };
-  const invokeProgram = () => {
-    console.log(params);
-    console.log(funcName);
-      console.log(id);
-
-    axios.post('http://localhost:8080/api/invoke', {name: funcName, params: params, programID: id}, {
-      headers: { 'Content-Type': 'application/octet-stream' }}
-      ) // Replace with your data
-        .then(response => {
-          console.log(response.data);
-        })
-        .catch(error => {
-            console.error('Error sending data:', error);
-        });
-};
 
   return (
-    <div>
-      <h1>React Application</h1>
-      <p>Message from Go: {message}</p>
-      <button onClick={sendDataToGo}>Send Data</button>
-     <h2>Functions</h2>
-     {userFuncs.map((func) => (
-        <div key={func[0]}>
-          <h3>{func[0]}</h3>
-          <h3>{func[1]}</h3>
-        </div>
-      ))}
-      <h2>ID</h2>
-      <p>{id}</p>
-      
-
-     <FileUploader setBytes={uploadBytes} />
-     
-     <label>
-        Function: <input name={funcName} onChange={setFuncName} />
-        Params: <input name={params} onChange={setParams} />
-      </label>
-      <button onClick={invokeProgram}>Call Function</button>
+    <div className="container">
+        <h1 className="header-text">JackJack IDE</h1>
+        <Divider  />
+      <PublishView addProgram={addProgram}/>
+      <Divider  />
+      <InvokeView programs={programs}/>
 
     </div>
   );

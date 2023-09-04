@@ -36,3 +36,22 @@
     transform: rotate(360deg);
   }
 }
+
+
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh; /* This ensures it takes up the full height of the viewport */
+}
+.publishContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+/* Style the header text */
+.header-text {
+  font-size: 30px;
+  font-weight: bold;
+}
