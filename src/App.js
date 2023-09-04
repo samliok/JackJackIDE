@@ -9,6 +9,9 @@ function App() {
   const [data, setData] = useState('');
   const [uploadedBytes, setUploadedBytes] = useState(null);
   const [userFuncs, setUserFuncs] = useState([]);
+  const [funcName, setFuncName] = useState('');
+  const [params, setParams] = useState('');
+
   const [id, setId] = useState(0);
   const uploadBytes = (bytes) => {
     setUploadedBytes(bytes);
@@ -30,14 +33,35 @@ function App() {
         ) // Replace with your data
           .then(response => {
             console.log(response.data);
-            setUserFuncs(response.data.functions);
+            var data = []
+            // loop through key value pairs
+            for (const [key, value] of Object.entries(response.data.function_data)) {
+              data.push([key, value])
+            }
+            setUserFuncs(data);
+            console.log(data);
             setId(response.data.id);
-              setData(response.data);
+            setData(response.data);
           })
           .catch(error => {
               console.error('Error sending data:', error);
           });
   };
+  const invokeProgram = () => {
+    console.log(params);
+    console.log(funcName);
+      console.log(id);
+
+    axios.post('http://localhost:8080/api/invoke', {name: funcName, params: params, programID: id}, {
+      headers: { 'Content-Type': 'application/octet-stream' }}
+      ) // Replace with your data
+        .then(response => {
+          console.log(response.data);
+        })
+        .catch(error => {
+            console.error('Error sending data:', error);
+        });
+};
 
   return (
     <div>
@@ -46,8 +70,9 @@ function App() {
       <button onClick={sendDataToGo}>Send Data</button>
      <h2>Functions</h2>
      {userFuncs.map((func) => (
-        <div key={func}>
-          <h3>{func}</h3>
+        <div key={func[0]}>
+          <h3>{func[0]}</h3>
+          <h3>{func[1]}</h3>
         </div>
       ))}
       <h2>ID</h2>
@@ -56,6 +81,12 @@ function App() {
 
      <FileUploader setBytes={uploadBytes} />
      
+     <label>
+        Function: <input name={funcName} onChange={setFuncName} />
+        Params: <input name={params} onChange={setParams} />
+      </label>
+      <button onClick={invokeProgram}>Call Function</button>
+
     </div>
   );
 }
