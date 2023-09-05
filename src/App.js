@@ -5,6 +5,7 @@ import './App.css'; // Import your CSS file
 import Divider from '@mui/material/Divider';
 import InvokeView from './Invoke';
 import Chip from '@mui/material/Chip';
+import KeysView from './Keys';
 
 axios.defaults.baseURL = 'http://localhost:8080'; // Change to your backend URL
 
@@ -46,6 +47,7 @@ function App() {
         <Divider  />
       <PublishView addProgram={addProgram}/>
       <InvokeView programs={programs}/>
+      <KeysView />
       
     </div>
   );

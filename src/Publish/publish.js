@@ -10,7 +10,7 @@ const PublishView = (props) => {
         // ensure filename doesn't change during upload
         const requestFileName = fileName;
         // send request
-        axios.post('http://localhost:8080/api/publish', fileBytes, {
+        axios.post('/api/publish', fileBytes, {
           headers: { 'Content-Type': 'application/octet-stream' }}
           ) 
             .then(response => {

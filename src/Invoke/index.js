@@ -3,16 +3,27 @@ import React, { useState, useEffect } from 'react';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import FunctionInput from './FunctionInput';
+import Alert from '@mui/material/Alert';
+import IconButton from '@mui/material/IconButton';
+import Collapse from '@mui/material/Collapse';
+import CloseIcon from '@mui/icons-material/Close';
+
 // move to constants
 const id_string = "_id_0x";
 
 const InvokeView = (props) => {
 
     const programs = props.programs;
-    console.log(programs)
-    const [currentProgram, setCurrentProgram] = React.useState('');
-   
 
+    const [currentProgram, setCurrentProgram] = useState('');
+    const [alertOpen, setAlertOpen] = useState(false);
+    const [alertMessage, setAlertMessage] = useState('');
+    const [alertSeverity, setAlertSeverity] = useState("success");
+    const dsiplayAlert = (message, severity) => {
+        setAlertOpen(true);
+        setAlertMessage(message);
+        setAlertSeverity(severity);
+    }
     const handleChange = (
         event,
         newAlignment
@@ -39,7 +50,6 @@ const InvokeView = (props) => {
         return programName.split(id_string)[1];
     }
 
-
     const renderProgramFunctions = () => {
         // get current program
         var program = programs[currentProgram];
@@ -48,19 +58,39 @@ const InvokeView = (props) => {
         }
         // loop through functions
         return program.map((func) => (
-            <div>
-                <FunctionInput id={getProgramId(currentProgram)} name={func[0]} numParams={func[1]} />
+            <div key={func[0]}>
+                <FunctionInput displayAlert={dsiplayAlert} id={getProgramId(currentProgram)} name={func[0]} numParams={func[1]} />
             </div>
         ))
     }
 
   return (
    <div className='publishContainer'>
-   
     {programs != null && 
-    
     <div> 
-        {renderProgramToggle()} {renderProgramFunctions()}    
+
+    {renderProgramToggle()}    
+      <Collapse in={alertOpen}>
+        <Alert
+          severity={alertSeverity}
+          action={
+            <IconButton
+              aria-label="close"
+              color="inherit"
+              size="small"
+              onClick={() => {
+                setAlertOpen(false);
+              }}
+            >
+              <CloseIcon fontSize="inherit" />
+            </IconButton>
+          }
+        >
+          {alertMessage}
+        </Alert>
+      </Collapse>
+        
+        {renderProgramFunctions()}    
      </div>
 
     

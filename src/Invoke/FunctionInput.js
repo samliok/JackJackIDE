@@ -15,13 +15,15 @@ const FunctionInput = (props) => {
 
     const invokeProgram = () => {
         console.log(params);
-        axios.post('http://localhost:8080/api/invoke', {name: name, params: params, programID: id}, {
+        axios.post('/api/invoke', {name: name, params: params, programID: id}, {
             headers: { 'Content-Type': 'application/octet-stream' }}
             ) // Replace with your data
             .then(response => {
+                props.displayAlert("Success! TX returned: ".concat(response.data.result), "success");
                 console.log(response.data);
             })
             .catch(error => {
+                props.displayAlert(error.message, "error");
                 console.error('Error sending data:', error);
             });
     }
