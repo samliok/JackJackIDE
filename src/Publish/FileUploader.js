@@ -21,9 +21,7 @@ const FileUploader = (props) => {
   };
 
   return (
-    <div>
       <Input type="file" onChange={handleFileUpload} />
-    </div>
   );
 };
 
