@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Button, ButtonGroup } from "@material-tailwind/react";
 
 const KeysView = (props) => {
   const [keys, setKeys] = useState(null); // Initialize state to an empty string
@@ -19,20 +20,17 @@ const KeysView = (props) => {
 
   const renderKeys = () => {
     if (keys == null) {
-      return <div></div>;
+      return <></>;
     }
     return keys.map((key) => (
-      <div>
-        <h3>{key}</h3>
-      </div>
+      <Button>{key}</Button>
     ));
   };
 
   return (
-    <div>
-      <h2 className="second-header">Keys</h2>
+    <ButtonGroup>
       {renderKeys()}
-    </div>
+    </ButtonGroup>
   );
 };
 

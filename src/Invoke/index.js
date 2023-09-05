@@ -8,6 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import Collapse from "@mui/material/Collapse";
 import CloseIcon from "@mui/icons-material/Close";
 import Grid from "@mui/material/Grid";
+import { Card, CardBody, CardFooter, Button, Typography, Input } from "@material-tailwind/react";
 
 // move to constants
 const id_string = "_id_0x";
@@ -68,7 +69,29 @@ const InvokeView = (props) => {
     ));
   };
 
-  return (
+  return (<>
+    <Card className="mx-auto mt-6 w-full max-w-[26rem]">
+      <CardBody>
+        <Typography variant="h5" color="blue-gray" className="mb-2">
+          Lottery
+        </Typography>
+        <Typography>
+          <form className="">
+            <div className="mb-4 flex flex-col gap-6">
+              <div class="pt-6">
+                <Typography as="Test" className="pt-6 mr-4 py-1.5 font-bold">Function Name</Typography>
+              </div>
+              <Input type="number" size="lg" label="Parameter 1" />
+              <Input type="string" size="lg" label="Parameter 2" />
+            </div>
+            <Button className="mt-6" color="blue-gray" fullWidth>
+              Submit Transaction
+            </Button>
+          </form>
+        </Typography>
+      </CardBody>
+    </Card>
+
     <Grid container spacing={2}>
       <Grid item xs={12}>
         {programs != null && (
@@ -104,6 +127,7 @@ const InvokeView = (props) => {
         )}
       </Grid>
     </Grid>
+  </>
   );
 };
 
