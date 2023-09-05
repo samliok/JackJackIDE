@@ -37,21 +37,35 @@
   }
 }
 
-
 .container {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
   height: 100vh; /* This ensures it takes up the full height of the viewport */
-}
-.publishContainer {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
 }
 
 /* Style the header text */
 .header-text {
-  font-size: 30px;
+  font-size: 40px;
   font-weight: bold;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  /* underline */
+  text-decoration: underline;
+  text-decoration-color: #9c9998;
+
+  text-decoration-thickness: 2px;
+  text-decoration-style: solid;
+}
+
+/* Style the function names */
+.second-header {
+  font-size: 25px;
+  font-weight: semi-bold;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  /* underline */
+  text-decoration: underline;
+  text-decoration-color: #9c9998;
+  text-decoration-thickness: 2px;
+  text-decoration-style: solid;
 }

@@ -1,8 +1,8 @@
 // from chatgpt with modifications
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import Input from "@mui/material/Input";
 
 const FileUploader = (props) => {
-
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
 
@@ -22,8 +22,7 @@ const FileUploader = (props) => {
 
   return (
     <div>
-      <input type="file" onChange={handleFileUpload} />
-      {props.fileName && <p>Uploaded File: {props.fileName}</p>}
+      <Input type="file" onChange={handleFileUpload} />
     </div>
   );
 };
