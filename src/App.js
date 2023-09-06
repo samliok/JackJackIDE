@@ -43,48 +43,54 @@ function App() {
   };
 
   return (
-    <Grid
-      container
-      spacing={2}
-      direction="column"
-      style={{ width: "75%", margin: "0 auto", alignItems: "center" }}
-    >
-      <Grid item xs={12} style={{ padding: "16px 0" }}>
-        <Typography variant="h3" className="header-text">
-          JackJack IDE
-        </Typography>
-      </Grid>
+    <div className="container">
       <Grid
-        item
-        xs={6}
-        style={{
-          backgroundColor: "#f5f5f5",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "25px",
-          borderRadius: "20px",
-        }}
-        align="center"
+        container
+        spacing={2}
+        direction="column"
+        style={{ width: "75%", margin: "0 auto", alignItems: "center" }}
       >
-        <PublishView addProgram={addProgram} />
-      </Grid>
-      <Grid
-        item
-        xs={6}
-        style={{
-          backgroundColor: "#f5f5f5",
-          margin: "20px",
-          borderRadius: "20px",
-        }}
-        align="center"
-      >
-        <KeysView />
-      </Grid>
+        <Grid item xs={12} style={{ padding: "16px 0" }}>
+          <Typography
+            variant="h3"
+            style={{ fontWeight: "bold" }}
+            className="header-text"
+          >
+            WASM Program IDE
+          </Typography>
+        </Grid>
+        <Grid
+          item
+          xs={6}
+          style={{
+            backgroundColor: "#FAFFFD",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "25px",
+            borderRadius: "20px",
+          }}
+          align="center"
+        >
+          <PublishView addProgram={addProgram} />
+        </Grid>
+        <Grid
+          item
+          xs={6}
+          style={{
+            backgroundColor: "#FAFFFD",
+            margin: "20px",
+            borderRadius: "20px",
+          }}
+          align="center"
+        >
+          <KeysView />
+        </Grid>
 
-      <Grid item xs={12} align="center">
-        <InvokeView programs={programs} />
+        <Grid item xs={12} align="center">
+          <InvokeView programs={programs} />
+        </Grid>
       </Grid>
-    </Grid>
+    </div>
   );
 }
 

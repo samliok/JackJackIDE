@@ -72,13 +72,15 @@ const FunctionInput = (props) => {
         }}
         align="left"
       >
-        <Grid item xs={12} md={3}>
+        <Grid item xs={12} md={2}>
           <Typography className="second-header">{name}</Typography>
         </Grid>
-        <Grid xs={12} md={6}>
-          {inputElements}
+        <Grid item xs={12} md={8}>
+          <div style={{ display: "flex", overflowX: "auto", padding: "10px" }}>
+            {inputElements}
+          </div>
         </Grid>
-        <Grid xs={12} md={3}>
+        <Grid item xs={12} md={2}>
           <Button variant="contained" onClick={invokeProgram}>
             Send TX
           </Button>

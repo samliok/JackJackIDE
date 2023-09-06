@@ -1,5 +1,7 @@
 .container {
   height: 100vh; /* This ensures it takes up the full height of the viewport */
+  background-color: #fdc7ab;
+  overflow: auto;
 }
 
 .function-container {
@@ -19,8 +21,6 @@
 .header-text {
   /* underline */
   text-decoration: underline;
-  text-decoration-color: #9c9998;
-
   text-decoration-thickness: 2px;
   text-decoration-style: solid;
 }
