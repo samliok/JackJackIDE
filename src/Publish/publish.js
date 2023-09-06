@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import FileUploader from "./FileUploader";
 import axios from "axios";
-import { Button, Typography, Navbar } from "@material-tailwind/react";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
 
 const PublishView = (props) => {
   const [fileBytes, setFileBytes] = useState(null);
@@ -33,20 +34,24 @@ const PublishView = (props) => {
   };
 
   return (
-    <>
-      <FileUploader
-        fileName={fileName}
-        setFileName={setFileName}
-        setBytes={setFileBytes}
-      />
-      <Button
-        disabled={fileBytes == null}
-        onClick={publishProgramToGo}
-      >
-        Publish Program!
-      </Button>
-    </>
-
+    <Grid container spacing={2}>
+      <Grid item xs={12} md={6}>
+        <FileUploader
+          fileName={fileName}
+          setFileName={setFileName}
+          setBytes={setFileBytes}
+        />
+      </Grid>
+      <Grid item xs={12} md={6}>
+        <Button
+          disabled={fileBytes == null}
+          onClick={publishProgramToGo}
+          variant="contained"
+        >
+          Publish Program!
+        </Button>
+      </Grid>
+    </Grid>
   );
 };
 
