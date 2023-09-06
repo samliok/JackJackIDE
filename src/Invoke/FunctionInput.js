@@ -31,7 +31,10 @@ const FunctionInput = (props) => {
       ) // Replace with your data
       .then((response) => {
         props.displayAlert(
-          "Success! TX returned: ".concat(response.data.result),
+          "Success! Total Gas: " +
+            response.data.gas +
+            ". Result: " +
+            response.data.result,
           "success"
         );
         console.log(response.data);
