@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import axios from "axios";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
-
+import { Typography } from "@mui/material";
 const FunctionInput = (props) => {
   const name = props.name;
   const numParams = props.numParams;
@@ -61,8 +61,21 @@ const FunctionInput = (props) => {
     }
 
     return (
-      <Grid container spacing={2} align="left">
-        <Grid xs={12} md={9}>
+      <Grid
+        container
+        spacing={2}
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "center",
+          paddingBottom: "25px",
+        }}
+        align="left"
+      >
+        <Grid item xs={12} md={3}>
+          <Typography className="second-header">{name}</Typography>
+        </Grid>
+        <Grid xs={12} md={6}>
           {inputElements}
         </Grid>
         <Grid xs={12} md={3}>
@@ -74,9 +87,8 @@ const FunctionInput = (props) => {
     );
   };
   return (
-    <Grid container spacing={2} align="center">
+    <Grid container spacing={2} align="left">
       <Grid item xs={12}>
-        <h2 className="second-header">{name}</h2>
         {renderInputs()}
       </Grid>
     </Grid>

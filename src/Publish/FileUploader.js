@@ -20,11 +20,7 @@ const FileUploader = (props) => {
     }
   };
 
-  return (
-    <div>
-      <Input type="file" onChange={handleFileUpload} />
-    </div>
-  );
+  return <Input type="file" onChange={handleFileUpload} />;
 };
 
 export default FileUploader;

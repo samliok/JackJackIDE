@@ -3,6 +3,8 @@ import FileUploader from "./FileUploader";
 import axios from "axios";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
+import Card from "@mui/material/Grid";
+import CardContent from "@mui/material/CardContent";
 
 const PublishView = (props) => {
   const [fileBytes, setFileBytes] = useState(null);

@@ -7,6 +7,7 @@ import InvokeView from "./Invoke";
 import Chip from "@mui/material/Chip";
 import KeysView from "./Keys";
 import Grid from "@mui/material/Grid";
+import { Typography } from "@mui/material";
 
 axios.defaults.baseURL = "http://localhost:8080"; // Change to your backend URL
 
@@ -42,21 +43,45 @@ function App() {
   };
 
   return (
-    <Grid container spacing={2} align="center">
-      <Grid item xs={12}>
-        <h1 className="header-text">JackJack IDE</h1>
+    <Grid
+      container
+      spacing={2}
+      direction="column"
+      style={{ width: "75%", margin: "0 auto", alignItems: "center" }}
+    >
+      <Grid item xs={12} style={{ padding: "16px 0" }}>
+        <Typography variant="h3" className="header-text">
+          JackJack IDE
+        </Typography>
       </Grid>
       <Grid
         item
-        xs={12}
-        style={{ borderBottom: "2px solid gray", paddingBottom: 10 }}
+        xs={6}
+        style={{
+          backgroundColor: "#f5f5f5",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "25px",
+          borderRadius: "20px",
+        }}
+        align="center"
       >
         <PublishView addProgram={addProgram} />
       </Grid>
-      <Grid item xs={12} md={6}>
+      <Grid
+        item
+        xs={6}
+        style={{
+          backgroundColor: "#f5f5f5",
+          margin: "20px",
+          borderRadius: "20px",
+        }}
+        align="center"
+      >
         <KeysView />
       </Grid>
-      <Grid item xs={12} md={6}>
+
+      <Grid item xs={12} align="center">
         <InvokeView programs={programs} />
       </Grid>
     </Grid>

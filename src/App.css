@@ -1,53 +1,22 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 .container {
   height: 100vh; /* This ensures it takes up the full height of the viewport */
 }
 
+.function-container {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  /* bottom border */
+  padding-bottom: 10px;
+  border: 1px solid #282c34;
+
+  /* background-color: #61dafb; */
+}
+
 /* Style the header text */
 .header-text {
-  font-size: 40px;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
   /* underline */
   text-decoration: underline;
   text-decoration-color: #9c9998;
@@ -60,12 +29,18 @@
 .second-header {
   font-size: 25px;
   font-weight: semi-bold;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
   /* underline */
   text-decoration: underline;
   text-decoration-color: #9c9998;
   text-decoration-thickness: 2px;
   text-decoration-style: solid;
+}
+
+.publish-card {
+  /* background-color: #61dafb; */
+  border: #282c34;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 5px;
+  padding: 50px;
 }
