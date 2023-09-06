@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import PublishView from "./Publish/publish";
 import "./App.css"; // Import your CSS file
+import Divider from "@mui/material/Divider";
 import InvokeView from "./Invoke";
+import Chip from "@mui/material/Chip";
 import KeysView from "./Keys";
-import { Navbar, Typography } from "@material-tailwind/react";
-
+import Grid from "@mui/material/Grid";
 
 axios.defaults.baseURL = "http://localhost:8080"; // Change to your backend URL
 
@@ -41,22 +42,24 @@ function App() {
   };
 
   return (
-    <div className="container h-full w-full pt-5 flex flex-col justify-center bg-teal-50">
-      <Navbar className="mx-auto max-w-screen-xl py-2 px-4 lg:px-8 lg:py-4" color="blue-gray">
-        <Typography
-          as="a"
-          href="#"
-          className="mr-4 cursor-pointer py-1.5 font-bold text-white"
-        >
-          WASM VM Simulator
-        </Typography>
+    <Grid container spacing={2} align="center">
+      <Grid item xs={12}>
+        <h1 className="header-text">JackJack IDE</h1>
+      </Grid>
+      <Grid
+        item
+        xs={12}
+        style={{ borderBottom: "2px solid gray", paddingBottom: 10 }}
+      >
         <PublishView addProgram={addProgram} />
-
+      </Grid>
+      <Grid item xs={12} md={6}>
         <KeysView />
-      </Navbar>
-
-      <InvokeView programs={programs} />
-    </div>
+      </Grid>
+      <Grid item xs={12} md={6}>
+        <InvokeView programs={programs} />
+      </Grid>
+    </Grid>
   );
 }
 
