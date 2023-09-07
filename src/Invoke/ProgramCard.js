@@ -15,19 +15,14 @@ import InfoIcon from "@mui/icons-material/Info";
 
 // move to constants
 const id_string = "_id_0x";
-const getProgramId = (programName) => {
-  return programName.split(id_string)[1];
-};
-const getProgramName = (programName) => {
-  return programName.split(id_string)[0];
-};
 
 const ProgramCard = (props) => {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [alertSeverity, setAlertSeverity] = useState("success");
   const program = props.program;
-  const programName = props.programName;
+  const programId = props.programId;
+  const programName = props.cachedName ? props.cachedName : "Cached Program";
   const displayAlert = (message, severity) => {
     setAlertOpen(true);
     setAlertMessage(message);
@@ -40,23 +35,21 @@ const ProgramCard = (props) => {
       return <></>;
     }
     // loop through functions
-    return program.map((func) => (
+    return Object.keys(program).map((funcName) => (
       <FunctionInput
-        key={func[0]}
+        key={funcName}
         displayAlert={displayAlert}
-        id={getProgramId(programName)}
-        name={func[0]}
-        numParams={func[1]}
+        id={programId}
+        name={funcName}
+        numParams={program[funcName]}
       />
     ));
   };
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
+  const [anchorEl, setAnchorEl] = useState(null);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -111,8 +104,8 @@ const ProgramCard = (props) => {
             Helpful Tips:
             <ul>
               <li>
-                To execute functions within the {getProgramName(programName)}{" "}
-                program, click "Send TX" next to the desired function.
+                To execute functions within the {programName} program, click
+                "Send TX" next to the desired function.
               </li>
               <li>
                 Passing Parameters
@@ -157,11 +150,11 @@ const ProgramCard = (props) => {
           }}
         >
           <Typography variant="h2" style={{ fontSize: 28, fontWeight: "bold" }}>
-            {getProgramName(programName)}
+            {programName}
           </Typography>
         </div>
         <Typography variant="h3" style={{ fontSize: 15, fontWeight: "bold" }}>
-          ID: {getProgramId(programName)}
+          ID: {programId}
         </Typography>
       </Grid>
 

@@ -23,7 +23,12 @@ const InvokeView = (props) => {
     return Object.keys(programs)
       .reverse()
       .map((key) => (
-        <ProgramCard key={key} programName={key} program={programs[key]} />
+        <ProgramCard
+          key={key}
+          cachedName={props.cachedNames ? props.cachedNames[key] : null}
+          programId={key}
+          program={programs[key]}
+        />
       ));
   };
   return <>{renderPrograms()}</>;

@@ -14,32 +14,31 @@ axios.defaults.baseURL = "http://localhost:8080"; // Change to your backend URL
 const id_string = "_id_0x";
 // programs data structure looks like this
 // {
-//   "token_${id_string}1": [["mint", 3], ["transfer", 2]],
-//   "lottery_${id_string}3": [["set", 3], ["play", 2]]
-//   "token_${id_string}3": [["mint", 3], ["transfer", 2]]
+//   "1": [["mint", 3], ["transfer", 2]],
+//   "2": [["set", 3], ["play", 2]]
+//   "3": [["mint", 3], ["transfer", 2]]
 // }
 function App() {
   // stores all programs uploaded by user
   const [programs, setPrograms] = useState(null);
-
-  // useEffect(() => {
-  //   // Fetch data from the Go API
-  //   axios.get('http://localhost:8080/ping')
-  //     .then(response => {
-  //       console.log(response.data);
-  //     })
-  //     .catch(error => {
-  //       console.error('Error fetching data:', error);
-  //     });
-  // }, []);
+  const [cachedNames, setCachedNames] = useState(null);
+  useEffect(() => {
+    // Fetch data from the Go API
+    axios
+      .get("api/programs")
+      .then((response) => {
+        const programsData = response.data;
+        setPrograms(programsData.programs);
+      })
+      .catch((error) => {
+        alert("Please start go server. See README.md for instructions.");
+        console.error("Error fetching data:", error);
+      });
+  }, []);
 
   const addProgram = (fileName, id, programData) => {
-    // convert filename into program name
-    var programName = fileName.split(".")[0];
-    // append id
-    programName = programName + id_string + id;
-    // add to programs
-    setPrograms({ ...programs, [programName]: programData });
+    setCachedNames({ ...cachedNames, [id]: fileName.split(".")[0] });
+    setPrograms({ ...programs, [id]: programData });
   };
 
   return (
@@ -87,7 +86,7 @@ function App() {
         </Grid>
 
         <Grid item xs={12} align="center">
-          <InvokeView programs={programs} />
+          <InvokeView cachedNames={cachedNames} programs={programs} />
         </Grid>
       </Grid>
     </div>

@@ -20,15 +20,11 @@ const PublishView = (props) => {
       })
       .then((response) => {
         console.log(response.data);
-        var data = [];
-        // loop through key value pairs
-        for (const [key, value] of Object.entries(
+        props.addProgram(
+          requestFileName,
+          response.data.id,
           response.data.function_data
-        )) {
-          data.push([key, value]);
-        }
-        console.log(data);
-        props.addProgram(requestFileName, response.data.id, data);
+        );
       })
       .catch((error) => {
         console.error("Error sending data:", error);
