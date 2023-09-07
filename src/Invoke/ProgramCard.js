@@ -9,6 +9,9 @@ import Collapse from "@mui/material/Collapse";
 import CloseIcon from "@mui/icons-material/Close";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Grid";
+import Popover from "@mui/material/Popover";
+import Button from "@mui/material/Button";
+import InfoIcon from "@mui/icons-material/Info";
 
 // move to constants
 const id_string = "_id_0x";
@@ -47,6 +50,20 @@ const ProgramCard = (props) => {
       />
     ));
   };
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
+
   return (
     <Grid
       container
@@ -56,12 +73,93 @@ const ProgramCard = (props) => {
         borderRadius: "20px",
         padding: "25px",
         marginBottom: "45px",
+        position: "relative",
       }}
     >
+      <div
+        style={{
+          position: "absolute",
+          flexDirection: "row-reverse",
+          right: "0px",
+          top: "0px",
+        }}
+      >
+        <IconButton
+          aria-label="copy"
+          aria-describedby={id}
+          variant="contained"
+          onClick={handleClick}
+          style={{
+            position: "relative",
+            right: "0px",
+          }}
+        >
+          <InfoIcon />
+        </IconButton>
+        <Popover
+          id={id}
+          open={open}
+          anchorEl={anchorEl}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
+            alignItems: "center",
+          }}
+        >
+          <Typography sx={{ p: 2 }}>
+            Helpful Tips:
+            <ul>
+              <li>
+                To execute functions within the {getProgramName(programName)}{" "}
+                program, click "Send TX" next to the desired function.
+              </li>
+              <li>
+                Passing Parameters
+                <ul>
+                  <li>
+                    {" "}
+                    Pass parameters in the <strong>same order</strong> as the
+                    original function signature.
+                  </li>
+                  <li>
+                    For boolean values, use <strong>"true"</strong> or{" "}
+                    <strong>"false"</strong>.
+                  </li>
+                  <li>
+                    When dealing with Address values, select from the available
+                    keys provided above.
+                  </li>
+                  <li>
+                    State (first parameter) for each method is
+                    <strong> automatically </strong>
+                    handled.
+                  </li>
+                  <li>
+                    If you need to pass in the State of another program, refer
+                    to the <strong>ID</strong> displayed on the desired program
+                    card.
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </Typography>
+        </Popover>
+      </div>
+
       <Grid item xs={12}>
-        <Typography variant="h2" style={{ fontSize: 28, fontWeight: "bold" }}>
-          {getProgramName(programName)}
-        </Typography>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "flex-end",
+          }}
+        >
+          <Typography variant="h2" style={{ fontSize: 28, fontWeight: "bold" }}>
+            {getProgramName(programName)}
+          </Typography>
+        </div>
         <Typography variant="h3" style={{ fontSize: 15, fontWeight: "bold" }}>
           ID: {getProgramId(programName)}
         </Typography>

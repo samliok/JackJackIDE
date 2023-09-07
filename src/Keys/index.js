@@ -15,6 +15,7 @@ const KeysView = (props) => {
         setKeys(response.data.keys);
       })
       .catch((error) => {
+        alert("Please start go server. See README.md for instructions.");
         console.error("Error fetching data:", error);
       });
   }, []);

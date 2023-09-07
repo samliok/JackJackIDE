@@ -4,6 +4,7 @@ import axios from "axios";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import { Typography } from "@mui/material";
+const gas_limit = 10000;
 const FunctionInput = (props) => {
   const name = props.name;
   const numParams = props.numParams;
@@ -32,7 +33,7 @@ const FunctionInput = (props) => {
       .then((response) => {
         props.displayAlert(
           "Success! Total Gas: " +
-            response.data.gas +
+            (gas_limit - response.data.gas) +
             ". Result: " +
             response.data.result,
           "success"
